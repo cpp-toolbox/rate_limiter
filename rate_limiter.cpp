@@ -13,6 +13,15 @@ bool RateLimiter::attempt_to_run() {
     return false;
 }
 
+bool RateLimiter::attempt_to_run(double delta_time) {
+    manual_time_processed_since_last_tick += delta_time;
+    if (manual_time_processed_since_last_tick >= rate_limit_duration.count() / 1000.0) {
+        manual_time_processed_since_last_tick = 0.0;
+        return true;
+    }
+    return false;
+}
+
 void RateLimiter::change_rate_limit(int rate_limit_hz) {
     rate_limit_duration = std::chrono::milliseconds(1000 / rate_limit_hz);
 }
