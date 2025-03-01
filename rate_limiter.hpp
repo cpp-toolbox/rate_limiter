@@ -5,15 +5,15 @@
 
 class RateLimiter {
   public:
-    explicit RateLimiter(int rate_limit_hz);
+    explicit RateLimiter(double rate_limit_hz);
 
     bool attempt_to_run();
     bool attempt_to_run(double delta_time);
 
-    void change_rate_limit(int rate_limit_hz);
+    void change_rate_limit(double rate_limit_hz);
 
   private:
-    std::chrono::milliseconds rate_limit_duration;
+    std::chrono::milliseconds rate_limit_period;
     // AUTOMATIC TIME PROCESSING START
     std::chrono::steady_clock::time_point last_run_time;
     // AUTOMATIC TIME PROCESSING END
