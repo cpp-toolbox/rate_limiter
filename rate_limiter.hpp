@@ -12,7 +12,11 @@ class RateLimiter {
 
     void change_rate_limit(double rate_limit_hz);
 
+    double get_last_processed_time() const;
+
   private:
+    double last_processed_time = 0.0;
+
     std::chrono::duration<double> rate_limit_duration;
     // AUTOMATIC TIME PROCESSING START
     std::chrono::steady_clock::time_point last_run_time;
